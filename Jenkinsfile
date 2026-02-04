@@ -9,11 +9,12 @@ pipeline {
 
         stage('Clone') {
             steps {
-                git branch: 'develop', url: 'https://github.com/akito-sama/cargo-tracker.git'
+                git branch: 'main', url: 'https://github.com/SalmiFatimaZahra/cargo-tracker-UM6P1'
             }
         }
+        // test for webhook
 
-        stage('Build & Test with Coverage') {
+        stage('Build & Test ') {
             steps {
                 bat 'mvn clean verify'
             }
