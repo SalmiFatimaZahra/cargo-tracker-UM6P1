@@ -1,5 +1,3 @@
-
-
 FROM payara/server-full:6.2023.12
 
 # Déployer le WAR automatiquement
