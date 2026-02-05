@@ -6,7 +6,7 @@
 FROM payara/server-full:6.2023.12
 
 # Bonne pratique : Mettre le JDBC driver dans le bon dossier Payara
-COPY target/postgresql.jar /opt/payara/appserver/glassfish/domains/domain1/lib/
+# COPY target/postgresql.jar /opt/payara/appserver/glassfish/domains/domain1/lib/
 
 # Déployer le WAR directement dans autodeploy pour que Payara le démarre automatiquement
 COPY target/cargo-tracker.war /opt/payara/appserver/glassfish/domains/domain1/autodeploy/
