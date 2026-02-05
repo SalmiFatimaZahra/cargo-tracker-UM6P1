@@ -19,21 +19,17 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            environment {
-                SONAR_TOKEN = credentials('SONAR_TOKEN') // <-- ID du secret dans Jenkins
-            }
-            steps {
-                bat '''
-                    mvnw sonar:sonar ^
-                    -Dsonar.projectKey=cargo-tracker ^
-                    -Dsonar.projectName="Cargo Tracker" ^
-                    -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml ^
-                    -Dsonar.host.url=http://localhost:9000 ^
-                    -Dsonar.login=%SONAR_TOKEN%
-                '''
-            }
+    steps {
+        withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+            bat """
+                mvnw sonar:sonar ^
+                -Dsonar.projectKey=cargo-tracker ^
+                -Dsonar.host.url=http://localhost:9000 ^
+                -Dsonar.token=%SONAR_TOKEN%
+            """
         }
     }
+}
 
     post {
         success {
