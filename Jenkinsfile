@@ -5,9 +5,10 @@ pipeline {
         githubPush()
     }
 
-    // SUPPRIME ce bloc s'il n'y a rien à mettre dedans !
-    // environment {
-    // }
+    environment {
+        // Si tu veux que le SONAR_TOKEN soit dispo partout, sinon laisse-le dans le stage ci-dessous
+        // SONAR_TOKEN = credentials('sonar-token')
+    }
 
     stages {
         stage('Clone') {
@@ -24,10 +25,10 @@ pipeline {
 
         stage('SonarQube Analysis') {
             environment {
-                SONAR_TOKEN = credentials('sonar-token') // <-- mets l'ID correct ici
+                SONAR_TOKEN = credentials('sonar-token') // <-- Mets ici l'ID EXACT du secret Jenkins
             }
             steps {
-                withSonarQubeEnv('SonarQube Local') {
+                withSonarQubeEnv('SonarQube Local') {  // Correspond exactement au nom de ton serveur dans Jenkins > Manage Jenkins > Configure System > SonarQube servers
                     bat '''
                         mvn sonar:sonar ^
                         -Dsonar.projectKey=cargo-tracker ^
