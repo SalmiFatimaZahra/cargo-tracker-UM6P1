@@ -20,7 +20,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             environment {
-                SONAR_TOKEN = credentials('squ_576db34989544efc594907db996af509861c0ea5') 
+                SONAR_TOKEN = credentials(squ_576db34989544efc594907db996af509861c0ea5) 
             }
             steps {
                 bat '''
